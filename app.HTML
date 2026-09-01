@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maya Chen — AI/ML Engineer</title>
+<meta name="description" content="Portfolio of Maya Chen, AI/ML engineer building production machine learning systems and research prototypes.">
+
+<!--
+  HOW TO CUSTOMIZE THIS FILE
+  1. Search for "Maya Chen" and replace with your name (appears in <title>, nav logo, hero, footer).
+  2. Replace the email address "hello@mayachen.dev" with yours (two places: contact section + footer).
+  3. Update the social links in the footer (GitHub / LinkedIn / X) with your real URLs.
+  4. Swap the four project entries in the "Selected work" section with your own — keep the
+     structure (title, meta line, description, tag list, link) and it will stay laid out correctly.
+  5. Update "Stack" categories and "Experience" timeline entries with your real history.
+  6. The hero visual is a live 3D neural-node sphere built with three.js — no image needed.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --void: #080b10;
+    --panel: #0d1218;
+    --panel-raised: #131a23;
+    --paper: #e7ecf2;
+    --mist: #8792a2;
+    --mist-dim: #59626f;
+    --signal: #5eead4;
+    --signal-dim: rgba(94, 234, 212, 0.12);
+    --ember: #f2a93b;
+    --line: #202836;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --max-w: 1180px;
+    --edge: clamp(24px, 5vw, 72px);
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    background: var(--void);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  ::selection{ background: var(--signal); color: var(--void); }
+
+  a:focus-visible,
+  button:focus-visible{
+    outline: 2px solid var(--signal);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .wrap{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding-left: var(--edge);
+    padding-right: var(--edge);
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--signal);
+    letter-spacing: 0.02em;
+  }
+
+  h1, h2, h3{
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+
+  section{ position: relative; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(8, 11, 16, 0.72);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 18px var(--edge);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo{
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--paper);
+  }
+  .logo span{ color: var(--signal); }
+  .nav-links{
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--mist);
+  }
+  .nav-links a{ transition: color 0.2s ease; }
+  .nav-links a:hover{ color: var(--paper); }
+  .nav-toggle{ display: none; }
+
+  @media (max-width: 720px){
+    .nav-links{ display: none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: 90px;
+    overflow: hidden;
+  }
+  #hero-canvas{
+    position: absolute;
+    top: 0; right: 0;
+    width: 62%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.9;
+    -webkit-mask-image: linear-gradient(to left, black 45%, transparent 92%);
+            mask-image: linear-gradient(to left, black 45%, transparent 92%);
+  }
+  .hero-inner{
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--edge);
+    width: 100%;
+  }
+  .hero-content{ max-width: 620px; }
+  .hero h1{
+    font-size: clamp(2.4rem, 5.2vw, 4.1rem);
+    line-height: 1.06;
+    margin: 20px 0 24px;
+  }
+  .hero p.lede{
+    font-size: 1.1rem;
+    color: var(--mist);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+  .hero-actions{
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    padding: 13px 24px;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  }
+  .btn-primary{
+    background: var(--signal);
+    color: var(--void);
+    border-color: var(--signal);
+    font-weight: 500;
+  }
+  .btn-primary:hover{ transform: translateY(-1px); background: #7ff0dc; }
+  .btn-ghost{ color: var(--paper); }
+  .btn-ghost:hover{ border-color: var(--mist); background: var(--panel-raised); }
+
+  .scroll-cue{
+    position: absolute;
+    bottom: 36px;
+    left: var(--edge);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--mist-dim);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .scroll-cue .line{
+    width: 32px; height: 1px;
+    background: var(--mist-dim);
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 56px;
+    padding-top: 100px;
+  }
+  .section-head h2{ font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .section-head .eyebrow{ display: block; margin-bottom: 10px; }
+  .section-num{
+    font-family: var(--font-mono);
+    color: var(--mist-dim);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    padding-bottom: 100px;
+  }
+  .about-text p{
+    color: var(--mist);
+    max-width: 58ch;
+    margin-bottom: 18px;
+    font-size: 1.02rem;
+  }
+  .about-text p strong{ color: var(--paper); font-weight: 500; }
+
+  .stat-list{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .stat{
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .stat .num{
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--signal);
+  }
+  .stat .label{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--mist);
+    text-align: right;
+  }
+
+  @media (max-width: 860px){
+    .about-grid{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .work{ padding-bottom: 60px; }
+  .project{
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
+    align-items: center;
+    padding: 56px 0;
+    border-top: 1px solid var(--line);
+  }
+  .project:last-child{ border-bottom: 1px solid var(--line); }
+  .project.reverse{ grid-template-columns: 1.15fr 0.85fr; }
+  .project.reverse .project-visual{ order: 2; }
+  .project.reverse .project-body{ order: 1; }
+
+  .project-visual{
+    aspect-ratio: 4 / 3;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .project-visual svg{ width: 78%; height: 78%; }
+
+  .project-body .role{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--mist-dim);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .project-body h3{
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+  }
+  .project-body p{
+    color: var(--mist);
+    max-width: 46ch;
+    margin-bottom: 20px;
+  }
+  .tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .tag{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--signal);
+    background: var(--signal-dim);
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+  .project-link{
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--mist-dim);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .project-link:hover{ border-color: var(--signal); color: var(--signal); }
+
+  @media (max-width: 800px){
+    .project, .project.reverse{
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .project.reverse .project-visual{ order: 1; }
+    .project.reverse .project-body{ order: 2; }
+    .project-visual{ aspect-ratio: 16/10; }
+  }
+
+  /* ---------- STACK ---------- */
+  .stack{ padding-bottom: 100px; }
+  .stack-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .stack-group .cat{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ember);
+    margin-bottom: 16px;
+  }
+  .stack-group ul{ list-style: none; }
+  .stack-group li{
+    color: var(--mist);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+  .stack-group li:first-child{ padding-top: 0; }
+
+  @media (max-width: 860px){
+    .stack-grid{ grid-template-columns: 1fr 1fr; row-gap: 32px; }
+  }
+  @media (max-width: 480px){
+    .stack-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .experience{ padding-bottom: 100px; }
+  .timeline{
+    position: relative;
+    padding-left: 28px;
+    border-left: 1px solid var(--line);
+  }
+  .tl-item{
+    position: relative;
+    padding-bottom: 48px;
+  }
+  .tl-item:last-child{ padding-bottom: 0; }
+  .tl-item::before{
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 4px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--void);
+    border: 2px solid var(--signal);
+  }
+  .tl-item .when{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--mist-dim);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .tl-item h3{ font-size: 1.15rem; margin-bottom: 4px; }
+  .tl-item .org{ color: var(--signal); font-size: 0.95rem; margin-bottom: 12px; display: block; }
+  .tl-item p{ color: var(--mist); max-width: 56ch; }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    padding: 120px 0 80px;
+    text-align: center;
+  }
+  .contact .eyebrow{ display: block; margin-bottom: 18px; }
+  .contact h2{
+    font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+    max-width: 760px;
+    margin: 0 auto 40px;
+    line-height: 1.15;
+  }
+  .contact-email{
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+    font-weight: 600;
+    color: var(--signal);
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .contact-email:hover{ border-color: var(--signal); }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 32px var(--edge);
+  }
+  .footer-inner{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--mist-dim);
+  }
+  .social-row{ display: flex; gap: 22px; }
+  .social-row a{ color: var(--mist); transition: color 0.2s ease; }
+  .social-row a:hover{ color: var(--signal); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">maya<span>.</span>chen</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="eyebrow">AI / ML Engineer</span>
+        <h1>I build systems<br>that learn and reason.</h1>
+        <p class="lede">I design and ship production machine learning systems — from retrieval pipelines and fine-tuned language models to the infrastructure that keeps them fast and reliable at scale.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">View work</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="line"></span>scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">About</span>
+        <h2>Grounded in research,<br>built for production.</h2>
+      </div>
+      <span class="section-num">01</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm an AI/ML engineer with a background in applied NLP and distributed systems. My work sits at the point where a research idea has to survive contact with real traffic, real data drift, and real latency budgets.</p>
+        <p>Over the past six years I've shipped <strong>retrieval-augmented systems, fine-tuned LLMs, and computer vision pipelines</strong> for teams that needed more than a notebook — they needed something that could run unattended, get monitored, and get better over time.</p>
+        <p>I care most about the unglamorous half of ML: evaluation, observability, and the guardrails that let a model be trusted in production. I'm currently exploring agentic tool-use and small, efficient models fine-tuned for narrow, high-value tasks.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><span class="num">14</span><span class="label">models shipped to production</span></div>
+        <div class="stat"><span class="num">6</span><span class="label">years in applied ML</span></div>
+        <div class="stat"><span class="num">40%</span><span class="label">avg. inference latency reduction</span></div>
+        <div class="stat"><span class="num">3</span><span class="label">open-source libraries maintained</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="wrap work">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Selected work</span>
+        <h2>A few systems I've built.</h2>
+      </div>
+      <span class="section-num">02</span>
+    </div>
+
+    <div class="project">
+      <div class="project-visual">
+        <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="75" r="4" fill="#5eead4"/>
+          <circle cx="100" cy="30" r="4" fill="#5eead4"/>
+          <circle cx="100" cy="75" r="4" fill="#f2a93b"/>
+          <circle cx="100" cy="120" r="4" fill="#5eead4"/>
+          <circle cx="160" cy="50" r="4" fill="#5eead4"/>
+          <circle cx="160" cy="100" r="4" fill="#5eead4"/>
+          <g stroke="#2a3444" stroke-width="1">
+            <line x1="40" y1="75" x2="100" y2="30"/>
+            <line x1="40" y1="75" x2="100" y2="75"/>
+            <line x1="40" y1="75" x2="100" y2="120"/>
+            <line x1="100" y1="30" x2="160" y2="50"/>
+            <line x1="100" y1="75" x2="160" y2="50"/>
+            <line x1="100" y1="75" x2="160" y2="100"/>
+            <line x1="100" y1="120" x2="160" y2="100"/>
+          </g>
+        </svg>
+      </div>
+      <div class="project-body">
+        <span class="role">Retrieval infrastructure</span>
+        <h3>Semantic search for legal document review</h3>
+        <p>Built a hybrid dense/sparse retrieval pipeline over 40M legal documents, cutting paralegal review time by half while keeping recall above 96% on a held-out audit set.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">pgvector</span>
+          <span class="tag">Elasticsearch</span>
+          <span class="tag">FastAPI</span>
+        </div>
+        <a href="#" class="project-link">Read the write-up</a>
+      </div>
+    </div>
+
+    <div class="project reverse">
+      <div class="project-visual">
+        <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="20" width="140" height="110" rx="3" stroke="#2a3444"/>
+          <g stroke="#5eead4" stroke-width="1.2">
+            <line x1="30" y1="55" x2="170" y2="55"/>
+            <line x1="30" y1="90" x2="170" y2="90"/>
+            <line x1="65" y1="20" x2="65" y2="130"/>
+            <line x1="120" y1="20" x2="120" y2="130"/>
+          </g>
+          <rect x="65" y="55" width="55" height="35" fill="#f2a93b" fill-opacity="0.18" stroke="#f2a93b"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <span class="role">Computer vision · edge deployment</span>
+        <h3>Real-time defect detection on the factory line</h3>
+        <p>Trained and quantized a lightweight detection model for on-device inference on NVIDIA Jetson hardware, reaching 32ms latency and reducing missed defects by 61% over the manual process it replaced.</p>
+        <div class="tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">ONNX</span>
+          <span class="tag">TensorRT</span>
+          <span class="tag">C++</span>
+        </div>
+        <a href="#" class="project-link">Read the write-up</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-visual">
+        <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 100 Q 55 40, 80 100 T 130 100 T 180 100" stroke="#5eead4" stroke-width="1.5" fill="none"/>
+          <path d="M30 80 Q 55 110, 80 80 T 130 80 T 180 80" stroke="#2a3444" stroke-width="1.5" fill="none"/>
+          <circle cx="80" cy="100" r="3.5" fill="#f2a93b"/>
+          <circle cx="130" cy="100" r="3.5" fill="#5eead4"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <span class="role">LLM applications</span>
+        <h3>Fine-tuned support assistant with guarded tool use</h3>
+        <p>Fine-tuned an open-weight model on two years of resolved support tickets, wired it to internal APIs through a constrained tool-calling layer, and shipped an evaluation harness that catches regressions before release.</p>
+        <div class="tags">
+          <span class="tag">LoRA</span>
+          <span class="tag">vLLM</span>
+          <span class="tag">LangGraph</span>
+          <span class="tag">Ragas</span>
+        </div>
+        <a href="#" class="project-link">Read the write-up</a>
+      </div>
+    </div>
+
+    <div class="project reverse">
+      <div class="project-visual">
+        <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="75" r="50" stroke="#2a3444"/>
+          <circle cx="100" cy="75" r="4" fill="#f2a93b"/>
+          <path d="M100 75 L 138 45" stroke="#5eead4" stroke-width="1.5"/>
+          <path d="M100 75 L 60 100" stroke="#5eead4" stroke-width="1.5"/>
+          <circle cx="138" cy="45" r="3" fill="#5eead4"/>
+          <circle cx="60" cy="100" r="3" fill="#5eead4"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <span class="role">Reinforcement learning</span>
+        <h3>Multi-agent simulation for warehouse routing</h3>
+        <p>Designed a multi-agent RL environment simulating warehouse pick-paths, training policies that cut simulated travel distance by 28% over the incumbent heuristic router before handoff to the operations team.</p>
+        <div class="tags">
+          <span class="tag">PettingZoo</span>
+          <span class="tag">Ray RLlib</span>
+          <span class="tag">JAX</span>
+        </div>
+        <a href="#" class="project-link">Read the write-up</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack" class="wrap stack">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Stack</span>
+        <h2>Tools I reach for.</h2>
+      </div>
+      <span class="section-num">03</span>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <div class="cat">Languages</div>
+        <ul>
+          <li>Python</li>
+          <li>TypeScript</li>
+          <li>C++</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+      <div class="stack-group">
+        <div class="cat">ML & research</div>
+        <ul>
+          <li>PyTorch</li>
+          <li>JAX</li>
+          <li>Transformers</li>
+          <li>Ray RLlib</li>
+        </ul>
+      </div>
+      <div class="stack-group">
+        <div class="cat">Serving & infra</div>
+        <ul>
+          <li>vLLM / TGI</li>
+          <li>Kubernetes</li>
+          <li>Docker</li>
+          <li>Terraform</li>
+        </ul>
+      </div>
+      <div class="stack-group">
+        <div class="cat">Data & eval</div>
+        <ul>
+          <li>Postgres / pgvector</li>
+          <li>Airflow</li>
+          <li>Weights & Biases</li>
+          <li>Ragas</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="wrap experience">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Experience</span>
+        <h2>Where I've worked.</h2>
+      </div>
+      <span class="section-num">04</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="when">2023 — Present</span>
+        <h3>Senior ML Engineer</h3>
+        <span class="org">Northwind AI</span>
+        <p>Lead a team of four building retrieval and fine-tuning infrastructure used by every product team in the company. Own the evaluation framework that gates every model release.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when">2021 — 2023</span>
+        <h3>Machine Learning Engineer</h3>
+        <span class="org">Fieldstone Robotics</span>
+        <p>Built computer vision models for defect detection on manufacturing lines, taking systems from research prototype to on-device deployment across six factories.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when">2019 — 2021</span>
+        <h3>Data Scientist</h3>
+        <span class="org">Harbor Analytics</span>
+        <p>Developed forecasting and anomaly-detection models for logistics clients, and built the internal tooling that let non-technical analysts deploy new models safely.</p>
+      </div>
+      <div class="tl-item">
+        <span class="when">2018 — 2019</span>
+        <h3>Research Assistant, NLP Lab</h3>
+        <span class="org">University of Washington</span>
+        <p>Studied low-resource machine translation, contributing to two published papers on data augmentation for morphologically rich languages.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap contact">
+    <span class="eyebrow">Contact</span>
+    <h2>Working on something that needs a model to actually ship? Let's talk.</h2>
+    <a href="mailto:hello@mayachen.dev" class="contact-email">hello@mayachen.dev</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 Maya Chen</span>
+    <div class="social-row">
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">X</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+  camera.position.z = 9;
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  function resize(){
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+
+  // Build a sphere of nodes (an icosahedron-derived point set) with connecting edges
+  var group = new THREE.Group();
+  scene.add(group);
+
+  var geo = new THREE.IcosahedronGeometry(3.4, 2);
+  var positions = geo.attributes.position;
+  var nodeCount = positions.count;
+
+  // Points (nodes)
+  var pointsMat = new THREE.PointsMaterial({
+    color: 0x5eead4,
+    size: 0.07,
+    transparent: true,
+    opacity: 0.9
+  });
+  var pointsGeo = new THREE.BufferGeometry();
+  pointsGeo.setAttribute('position', positions.clone());
+  var points = new THREE.Points(pointsGeo, pointsMat);
+  group.add(points);
+
+  // A sparse set of highlighted "signal" nodes in amber
+  var emberIdx = [];
+  for (var i = 0; i < nodeCount; i += Math.floor(nodeCount / 7)) emberIdx.push(i);
+  var emberPositions = [];
+  emberIdx.forEach(function(idx){
+    emberPositions.push(positions.getX(idx), positions.getY(idx), positions.getZ(idx));
+  });
+  var emberGeo = new THREE.BufferGeometry();
+  emberGeo.setAttribute('position', new THREE.Float32BufferAttribute(emberPositions, 3));
+  var emberMat = new THREE.PointsMaterial({ color: 0xf2a93b, size: 0.13, transparent: true, opacity: 0.95 });
+  var emberPoints = new THREE.Points(emberGeo, emberMat);
+  group.add(emberPoints);
+
+  // Edges: connect nearby nodes to suggest a neural network
+  var edgeVerts = [];
+  var vec = new THREE.Vector3();
+  var vec2 = new THREE.Vector3();
+  var maxDist = 1.55;
+  for (var a = 0; a < nodeCount; a++){
+    vec.set(positions.getX(a), positions.getY(a), positions.getZ(a));
+    for (var b = a + 1; b < nodeCount; b++){
+      vec2.set(positions.getX(b), positions.getY(b), positions.getZ(b));
+      if (vec.distanceTo(vec2) < maxDist){
+        edgeVerts.push(vec.x, vec.y, vec.z, vec2.x, vec2.y, vec2.z);
+      }
+    }
+  }
+  var edgeGeo = new THREE.BufferGeometry();
+  edgeGeo.setAttribute('position', new THREE.Float32BufferAttribute(edgeVerts, 3));
+  var edgeMat = new THREE.LineBasicMaterial({ color: 0x2a3444, transparent: true, opacity: 0.55 });
+  var edges = new THREE.LineSegments(edgeGeo, edgeMat);
+  group.add(edges);
+
+  group.rotation.y = 0.4;
+  group.rotation.x = -0.15;
+
+  var mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+  window.addEventListener('mousemove', function(e){
+    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+  });
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  var clock = new THREE.Clock();
+
+  function animate(){
+    requestAnimationFrame(animate);
+    var t = clock.getElapsedTime();
+
+    targetX += (mouseX - targetX) * 0.03;
+    targetY += (mouseY - targetY) * 0.03;
+
+    if (!prefersReduced){
+      group.rotation.y = 0.4 + t * 0.08 + targetX * 0.3;
+      group.rotation.x = -0.15 + targetY * 0.2;
+    } else {
+      group.rotation.y = 0.4 + targetX * 0.15;
+      group.rotation.x = -0.15 + targetY * 0.1;
+    }
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
+
+</body>
+</html>
