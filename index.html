@@ -121,9 +121,9 @@
     border: 1px solid var(--glass-border);
     border-radius: 999px;
     padding: 12px 22px;
+    box-shadow: 0 12px 40px -12px rgba(0,0,0,0.6);
     cursor: pointer;
     transition: opacity 0.4s ease, visibility 0.4s ease;
-    box-shadow: 0 12px 40px -12px rgba(0,0,0,0.6);
   }
   .nav-pill{
     pointer-events: auto;
@@ -194,6 +194,7 @@
   .menu-overlay li:nth-child(3) a{ transition-delay: 0.17s; }
   .menu-overlay li:nth-child(4) a{ transition-delay: 0.23s; }
   .menu-overlay li:nth-child(5) a{ transition-delay: 0.29s; }
+  .menu-overlay li:nth-child(6) a{ transition-delay: 0.35s; }
 
   /* ---------- BUTTONS ---------- */
   .btn{
@@ -227,7 +228,7 @@
   [data-reveal].in-view{ opacity: 1; transform: translateY(0); filter: blur(0); }
 
   /* ---------- HERO ---------- */
-  .hero{ min-height: 100dvh; display: flex; align-items: center; padding-top: 120px; }
+  .hero{ min-height: 100dvh; display: flex; align-items: center; padding-top: 120px; overflow: hidden; }
   .hero-inner{ max-width: var(--max-w); margin: 0 auto; padding: 0 var(--edge); width: 100%; }
   .hero-content{ max-width: 680px; }
   .hero h1{ font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.04; margin: 0 0 26px; }
@@ -388,6 +389,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;top:0;right:0;width:62%;height:100%;z-index:0;opacity:0.9;-webkit-mask-image:linear-gradient(to left, black 45%, transparent 92%);mask-image:linear-gradient(to left, black 45%, transparent 92%);"></canvas>
     <div class="hero-inner">
       <div class="hero-content">
         <span class="eyebrow">AI / ML Engineer</span>
@@ -603,7 +605,7 @@
       text.split('').forEach(function(ch){
         var span = document.createElement('span');
         span.className = 'letter' + (isDot ? ' dot' : '');
-        span.textContent = ch === ' ' ? ' ' : ch;
+        span.textContent = ch === ' ' ? ' ' : ch;
         frag.appendChild(span);
       });
     });
