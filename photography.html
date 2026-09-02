@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography — SONAL KS</title>
+<meta name="description" content="Photography by SONAL KS — a side project in light, geometry, and travel.">
+
+<!--
+  HOW TO CUSTOMIZE THIS FILE
+  1. Every photo below points to a picsum.photos placeholder (seeded, so it's stable on reload).
+     Swap each <img src="..."> for your own photo, and update its data-title / data-caption.
+  2. Update the "About this hobby" paragraph and gear line with your own story/equipment.
+  3. The gallery order + spans (col-span-2, row-span-2 classes) control the bento layout —
+     rearrange freely, just keep at least one or two "hero" (span-2) shots for visual rhythm.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --void: #050506;
+    --void-2: #0a0a0d;
+    --glass: rgba(255,255,255,0.045);
+    --glass-hi: rgba(255,255,255,0.09);
+    --glass-border: rgba(255,255,255,0.09);
+    --ink: #f2f2f0;
+    --dim: #93939c;
+    --dim-2: #55555f;
+    --emerald: #34e8b0;
+    --emerald-dim: rgba(52, 232, 176, 0.12);
+    --violet: #a78bff;
+    --violet-dim: rgba(167, 139, 255, 0.12);
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --max-w: 1220px;
+    --edge: clamp(24px, 5vw, 80px);
+    --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; background: var(--void); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    background: var(--void);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  ::selection{ background: var(--emerald); color: var(--void); }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--emerald); outline-offset: 4px; border-radius: 2px; }
+
+  .wrap{ max-width: var(--max-w); margin: 0 auto; padding-left: var(--edge); padding-right: var(--edge); }
+  .eyebrow{
+    display: inline-block;
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--emerald); background: var(--emerald-dim);
+    border: 1px solid rgba(52,232,176,0.22); padding: 6px 14px; border-radius: 999px; margin-bottom: 22px;
+  }
+  h1, h2, h3{ font-family: var(--font-display); font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  section{ position: relative; }
+
+  /* ---------- FIXED BACKGROUND ---------- */
+  .grain{
+    position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .ambient{
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(48vw 48vw at 8% -6%, rgba(52,232,176,0.16), transparent 70%),
+      radial-gradient(46vw 46vw at 96% 12%, rgba(167,139,255,0.13), transparent 70%);
+  }
+  main, header.nav, footer{ position: relative; z-index: 2; }
+
+  /* ---------- NAV ---------- */
+  header.nav{ position: fixed; top: 18px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; pointer-events: none; }
+  .logo-badge{
+    pointer-events: auto; position: absolute; left: var(--edge); top: 50%; transform: translateY(-50%);
+    display: flex; align-items: center;
+    background: rgba(10,10,13,0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border); border-radius: 999px; padding: 12px 22px;
+    box-shadow: 0 12px 40px -12px rgba(0,0,0,0.6);
+  }
+  .nav-pill{
+    pointer-events: auto; display: flex; align-items: center; gap: 36px;
+    background: rgba(10,10,13,0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border); border-radius: 999px; padding: 12px 14px 12px 24px;
+    box-shadow: 0 12px 40px -12px rgba(0,0,0,0.6);
+  }
+  .logo{ font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink); }
+  .logo span{ color: var(--emerald); }
+  .nav-links{ display: flex; gap: 28px; list-style: none; font-family: var(--font-mono); font-size: 0.8rem; color: var(--dim); }
+  .nav-links a{ transition: color 0.5s var(--ease-fluid); }
+  .nav-links a:hover, .nav-links a.active{ color: var(--ink); }
+  .nav-cta{
+    font-family: var(--font-mono); font-size: 0.78rem; background: var(--ink); color: var(--void);
+    padding: 9px 18px; border-radius: 999px; transition: transform 0.5s var(--ease-fluid), background 0.5s var(--ease-fluid);
+  }
+  .nav-cta:hover{ transform: translateY(-1px); background: var(--emerald); }
+  .nav-toggle{
+    display: none; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--glass); border: 1px solid var(--glass-border); position: relative; cursor: pointer; flex-shrink: 0;
+  }
+  .nav-toggle span{ position: absolute; left: 9px; width: 16px; height: 1.5px; background: var(--ink); transition: transform 0.5s var(--ease-fluid); }
+  .nav-toggle span:nth-child(1){ top: 13px; }
+  .nav-toggle span:nth-child(2){ top: 19px; }
+  body.menu-open .nav-toggle span:nth-child(1){ transform: translateY(3px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2){ transform: translateY(-3px) rotate(-45deg); }
+
+  @media (max-width: 760px){ .nav-links, .nav-cta{ display: none; } .nav-toggle{ display: block; } }
+
+  .menu-overlay{
+    position: fixed; inset: 0; z-index: 90; background: rgba(5,5,6,0.86);
+    backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+    display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+    transition: opacity 0.6s var(--ease-fluid);
+  }
+  body.menu-open .menu-overlay{ opacity: 1; pointer-events: auto; }
+  .menu-overlay ul{ list-style: none; text-align: center; }
+  .menu-overlay li{ margin: 18px 0; overflow: hidden; }
+  .menu-overlay a{
+    font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); display: inline-block;
+    transform: translateY(48px); opacity: 0; transition: transform 0.7s var(--ease-fluid), opacity 0.7s var(--ease-fluid);
+  }
+  body.menu-open .menu-overlay a{ transform: translateY(0); opacity: 1; }
+  .menu-overlay li:nth-child(1) a{ transition-delay: 0.05s; }
+  .menu-overlay li:nth-child(2) a{ transition-delay: 0.11s; }
+  .menu-overlay li:nth-child(3) a{ transition-delay: 0.17s; }
+  .menu-overlay li:nth-child(4) a{ transition-delay: 0.23s; }
+  .menu-overlay li:nth-child(5) a{ transition-delay: 0.29s; }
+  .menu-overlay li:nth-child(6) a{ transition-delay: 0.35s; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    font-family: var(--font-mono); font-size: 0.85rem; padding: 8px 8px 8px 24px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 14px; transition: transform 0.5s var(--ease-fluid), background 0.5s var(--ease-fluid);
+  }
+  .btn-icon{ width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; transition: transform 0.5s var(--ease-fluid); }
+  .btn-ghost{ background: var(--glass); border: 1px solid var(--glass-border); color: var(--ink); }
+  .btn-ghost .btn-icon{ background: var(--glass-hi); }
+  .btn-ghost:hover{ background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+  .btn-ghost:hover .btn-icon{ transform: translate(2px,-2px); }
+
+  /* ---------- REVEAL ---------- */
+  [data-reveal]{ opacity: 0; transform: translateY(40px); filter: blur(6px); transition: opacity 0.9s var(--ease-fluid), transform 0.9s var(--ease-fluid), filter 0.9s var(--ease-fluid); }
+  [data-reveal].in-view{ opacity: 1; transform: translateY(0); filter: blur(0); }
+
+  /* ---------- HERO ---------- */
+  .hero{ min-height: 62dvh; display: flex; align-items: center; padding-top: 150px; padding-bottom: 40px; }
+  .hero-content{ max-width: 720px; }
+  .hero h1{ font-size: clamp(2.3rem, 5vw, 3.8rem); line-height: 1.08; margin: 0 0 22px; }
+  .hero h1 em{ font-style: normal; color: var(--emerald); }
+  .hero p.lede{ font-size: 1.1rem; color: var(--dim); max-width: 560px; }
+
+  /* ---------- SECTION HEADS ---------- */
+  .section-head{ display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 48px; padding-top: 60px; }
+  .section-head h2{ font-size: clamp(1.7rem, 3vw, 2.3rem); max-width: 640px; }
+  .section-num{ font-family: var(--font-mono); color: var(--dim-2); font-size: 0.8rem; white-space: nowrap; padding-bottom: 6px; }
+
+  /* ---------- BEZEL ---------- */
+  .bezel{ background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 1.6rem; padding: 8px; }
+  .bezel-core{ background: var(--void-2); border-radius: calc(1.6rem - 6px); box-shadow: inset 0 1px 1px rgba(255,255,255,0.06); height: 100%; }
+
+  /* ---------- ABOUT HOBBY ---------- */
+  .hobby{ padding-bottom: 100px; }
+  .hobby-grid{ display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; }
+  .hobby-text p{ color: var(--dim); max-width: 60ch; margin-bottom: 18px; font-size: 1.02rem; }
+  .hobby-text p strong{ color: var(--ink); font-weight: 600; }
+  .hobby-stats{ display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .hobby-stats .bezel-core{ padding: 22px 24px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .hobby-stats .num{ font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--emerald); }
+  .hobby-stats .label{ font-family: var(--font-mono); font-size: 0.72rem; color: var(--dim); text-align: right; }
+
+  @media (max-width: 860px){ .hobby-grid{ grid-template-columns: 1fr; gap: 32px; } }
+
+  /* ---------- GALLERY (bento) ---------- */
+  .gallery{ padding-bottom: 120px; }
+  .bento{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 160px;
+    gap: 16px;
+  }
+  .shot{
+    position: relative; overflow: hidden; border-radius: 1.2rem;
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    grid-column: span 1; grid-row: span 1;
+  }
+  .shot.w2{ grid-column: span 2; }
+  .shot.h2{ grid-row: span 2; }
+  .shot img{
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transform: scale(1.02);
+    transition: transform 0.9s var(--ease-fluid), filter 0.9s var(--ease-fluid);
+  }
+  .shot:hover img{ transform: scale(1.09); }
+  .shot-caption{
+    position: absolute; inset: auto 0 0 0; padding: 16px;
+    background: linear-gradient(to top, rgba(5,5,6,0.85), transparent 70%);
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.5s var(--ease-fluid), transform 0.5s var(--ease-fluid);
+  }
+  .shot:hover .shot-caption{ opacity: 1; transform: translateY(0); }
+  .shot-caption .title{ font-family: var(--font-display); font-size: 0.98rem; color: var(--ink); display: block; }
+  .shot-caption .loc{ font-family: var(--font-mono); font-size: 0.72rem; color: var(--emerald); }
+
+  @media (max-width: 900px){
+    .bento{ grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+  }
+  @media (max-width: 540px){
+    .bento{ grid-template-columns: 1fr; grid-auto-rows: 240px; }
+    .shot.w2{ grid-column: span 1; }
+    .shot.h2{ grid-row: span 1; }
+  }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position: fixed; inset: 0; z-index: 200; background: rgba(3,3,4,0.92);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    display: flex; align-items: center; justify-content: center; padding: 5vw;
+    opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease-fluid);
+  }
+  .lightbox.open{ opacity: 1; pointer-events: auto; }
+  .lightbox-inner{ max-width: 1100px; max-height: 88vh; width: 100%; text-align: center; }
+  .lightbox img{ max-width: 100%; max-height: 74vh; border-radius: 1rem; display: block; margin: 0 auto; box-shadow: 0 30px 80px -20px rgba(0,0,0,0.7); }
+  .lightbox-caption{ margin-top: 18px; font-family: var(--font-mono); font-size: 0.85rem; color: var(--dim); }
+  .lightbox-caption strong{ color: var(--ink); font-family: var(--font-display); font-size: 1.05rem; display: block; margin-bottom: 6px; }
+  .lightbox-close{
+    position: absolute; top: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%;
+    background: var(--glass); border: 1px solid var(--glass-border); color: var(--ink);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer;
+    transition: background 0.4s var(--ease-fluid), transform 0.4s var(--ease-fluid);
+  }
+  .lightbox-close:hover{ background: rgba(255,255,255,0.12); transform: rotate(90deg); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top: 1px solid var(--glass-border); padding: 32px var(--edge) 48px; }
+  .footer-inner{ max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--dim-2); }
+  .social-row{ display: flex; gap: 22px; }
+  .social-row a{ color: var(--dim); transition: color 0.4s var(--ease-fluid); }
+  .social-row a:hover{ color: var(--emerald); }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="ambient" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="landing.html" class="logo-badge logo">SONAL<span>.</span>KS</a>
+  <div class="nav-pill">
+    <ul class="nav-links">
+      <li><a href="landing.html#work">Work</a></li>
+      <li><a href="landing.html#about">About</a></li>
+      <li><a href="landing.html#stack">Stack</a></li>
+      <li><a href="landing.html#experience">Experience</a></li>
+      <li><a href="photography.html" class="active">Photography</a></li>
+    </ul>
+    <a href="landing.html#contact" class="nav-cta">Contact</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay">
+  <ul>
+    <li><a href="landing.html#work">Work</a></li>
+    <li><a href="landing.html#about">About</a></li>
+    <li><a href="landing.html#stack">Stack</a></li>
+    <li><a href="landing.html#experience">Experience</a></li>
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="landing.html#contact">Contact</a></li>
+  </ul>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-content">
+      <span class="eyebrow">Hobby · Photography</span>
+      <h1 data-reveal>The other lens<br>I look <em>through</em>.</h1>
+      <p class="lede" data-reveal>When I'm not training models, I'm usually out with a camera — chasing the same thing either way: the moment a pattern resolves into something worth keeping. Below are a few of my favorite frames.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT THE HOBBY -->
+  <section class="wrap hobby">
+    <div class="hobby-grid">
+      <div class="hobby-text" data-reveal>
+        <p>Photography is my hobby outside of work — the analog counterpart to everything I do with models during the day. Where ML is about finding signal in noise at scale, a camera is about finding it one frame at a time: the way light falls on a stairwell, the gap in a crowd that makes a street shot work.</p>
+        <p>I shoot mostly with a <strong>Fujifilm X100V</strong> and a couple of manual prime lenses — no flash, minimal editing. I'd rather wait for the light to be right than fix it afterward.</p>
+      </div>
+      <div class="hobby-stats" data-reveal>
+        <div class="bezel"><div class="bezel-core"><span class="num">9</span><span class="label">countries shot in</span></div></div>
+        <div class="bezel"><div class="bezel-core"><span class="num">35mm</span><span class="label">go-to focal length</span></div></div>
+        <div class="bezel"><div class="bezel-core"><span class="num">120+</span><span class="label">rolls & frames kept</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="wrap gallery">
+    <div class="section-head" data-reveal>
+      <div><span class="eyebrow">Selected frames</span><h2>A few of my best clicks.</h2></div>
+      <span class="section-num">01</span>
+    </div>
+
+    <div class="bento" data-reveal>
+      <div class="shot w2 h2" data-title="Ridge line, blue hour" data-loc="Ladakh, India">
+        <img src="https://picsum.photos/seed/ridge-sonal/1200/1200" loading="lazy" alt="Ridge line at blue hour, Ladakh">
+        <div class="shot-caption"><span class="title">Ridge line, blue hour</span><span class="loc">Ladakh, India</span></div>
+      </div>
+      <div class="shot" data-title="Back alley, neon spill" data-loc="Kyoto, Japan">
+        <img src="https://picsum.photos/seed/alley-sonal/800/800" loading="lazy" alt="Back alley with neon light, Kyoto">
+        <div class="shot-caption"><span class="title">Back alley, neon spill</span><span class="loc">Kyoto, Japan</span></div>
+      </div>
+      <div class="shot h2" data-title="Harbor fog" data-loc="Lofoten, Norway">
+        <img src="https://picsum.photos/seed/harbor-sonal/800/1100" loading="lazy" alt="Foggy harbor, Lofoten">
+        <div class="shot-caption"><span class="title">Harbor fog</span><span class="loc">Lofoten, Norway</span></div>
+      </div>
+      <div class="shot" data-title="Market rhythm" data-loc="Marrakech, Morocco">
+        <img src="https://picsum.photos/seed/market-sonal/800/800" loading="lazy" alt="Market scene, Marrakech">
+        <div class="shot-caption"><span class="title">Market rhythm</span><span class="loc">Marrakech, Morocco</span></div>
+      </div>
+      <div class="shot w2" data-title="Coast road" data-loc="Big Sur, California">
+        <img src="https://picsum.photos/seed/coast-sonal/1200/700" loading="lazy" alt="Coast road, Big Sur">
+        <div class="shot-caption"><span class="title">Coast road</span><span class="loc">Big Sur, California</span></div>
+      </div>
+      <div class="shot" data-title="Temple steps" data-loc="Kyoto, Japan">
+        <img src="https://picsum.photos/seed/temple-sonal/800/800" loading="lazy" alt="Temple steps, Kyoto">
+        <div class="shot-caption"><span class="title">Temple steps</span><span class="loc">Kyoto, Japan</span></div>
+      </div>
+      <div class="shot" data-title="Fog over the valley" data-loc="Munnar, India">
+        <img src="https://picsum.photos/seed/fogvalley-sonal/800/800" loading="lazy" alt="Foggy valley, Munnar">
+        <div class="shot-caption"><span class="title">Fog over the valley</span><span class="loc">Munnar, India</span></div>
+      </div>
+      <div class="shot h2" data-title="Stairwell geometry" data-loc="Chandigarh, India">
+        <img src="https://picsum.photos/seed/stairs-sonal/800/1100" loading="lazy" alt="Stairwell geometry, Chandigarh">
+        <div class="shot-caption"><span class="title">Stairwell geometry</span><span class="loc">Chandigarh, India</span></div>
+      </div>
+      <div class="shot w2" data-title="Dunes at dusk" data-loc="Jaisalmer, India">
+        <img src="https://picsum.photos/seed/dunes-sonal/1200/700" loading="lazy" alt="Desert dunes at dusk, Jaisalmer">
+        <div class="shot-caption"><span class="title">Dunes at dusk</span><span class="loc">Jaisalmer, India</span></div>
+      </div>
+      <div class="shot" data-title="Neon crossing" data-loc="Tokyo, Japan">
+        <img src="https://picsum.photos/seed/neon-sonal/800/800" loading="lazy" alt="Neon-lit crossing, Tokyo">
+        <div class="shot-caption"><span class="title">Neon crossing</span><span class="loc">Tokyo, Japan</span></div>
+      </div>
+      <div class="shot" data-title="Forest floor" data-loc="Coorg, India">
+        <img src="https://picsum.photos/seed/forest-sonal/800/800" loading="lazy" alt="Forest floor, Coorg">
+        <div class="shot-caption"><span class="title">Forest floor</span><span class="loc">Coorg, India</span></div>
+      </div>
+      <div class="shot" data-title="Window light" data-loc="Lisbon, Portugal">
+        <img src="https://picsum.photos/seed/window-sonal/800/800" loading="lazy" alt="Window light, Lisbon">
+        <div class="shot-caption"><span class="title">Window light</span><span class="loc">Lisbon, Portugal</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA back -->
+  <section class="wrap" style="padding-bottom: 100px;">
+    <a href="landing.html" class="btn btn-ghost" data-reveal>Back to the main site<span class="btn-icon">↗</span></a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 SONAL KS</span>
+    <div class="social-row"><a href="#">GitHub</a><a href="#">LinkedIn</a><a href="#">X</a></div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <div class="lightbox-inner">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption"><strong id="lightboxTitle"></strong><span id="lightboxLoc"></span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var toggle = document.getElementById('navToggle');
+  if (toggle){
+    toggle.addEventListener('click', function(){ document.body.classList.toggle('menu-open'); });
+    document.querySelectorAll('.menu-overlay a').forEach(function(a){
+      a.addEventListener('click', function(){ document.body.classList.remove('menu-open'); });
+    });
+  }
+
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxTitle = document.getElementById('lightboxTitle');
+  var lightboxLoc = document.getElementById('lightboxLoc');
+  var lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.shot').forEach(function(shot){
+    shot.addEventListener('click', function(){
+      var img = shot.querySelector('img');
+      lightboxImg.src = img.src.replace(/\/\d+\/\d+$/, '/1600/1200');
+      lightboxImg.alt = img.alt;
+      lightboxTitle.textContent = shot.getAttribute('data-title') || '';
+      lightboxLoc.textContent = shot.getAttribute('data-loc') || '';
+      lightbox.classList.add('open');
+    });
+  });
+
+  function closeLightbox(){ lightbox.classList.remove('open'); }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+  window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLightbox(); });
+})();
+</script>
+
+</body>
+</html>
