@@ -111,6 +111,20 @@
     display: flex; justify-content: center;
     pointer-events: none;
   }
+  .logo-badge{
+    pointer-events: auto;
+    position: absolute; left: var(--edge); top: 50%; transform: translateY(-50%);
+    display: flex; align-items: center;
+    background: rgba(10,10,13,0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    box-shadow: 0 12px 40px -12px rgba(0,0,0,0.6);
+  }
   .nav-pill{
     pointer-events: auto;
     display: flex; align-items: center; gap: 36px;
@@ -123,7 +137,11 @@
     box-shadow: 0 12px 40px -12px rgba(0,0,0,0.6);
   }
   .logo{ font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink); }
-  .logo span{ color: var(--emerald); }
+  .logo .letter{
+    display: inline-block;
+    transition: transform 0.85s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease;
+  }
+  .logo .letter.dot{ color: var(--emerald); }
   .nav-links{ display: flex; gap: 28px; list-style: none; font-family: var(--font-mono); font-size: 0.8rem; color: var(--dim); }
   .nav-links a{ transition: color 0.5s var(--ease-fluid); }
   .nav-links a:hover{ color: var(--ink); }
@@ -341,13 +359,14 @@
 </div>
 
 <header class="nav">
+  <a href="#top" class="logo-badge logo">SONAL<span>.</span>KS</a>
   <div class="nav-pill">
-    <a href="#top" class="logo">SONAL<span>.</span>KS</a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#stack">Stack</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="photography.html">Photography</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Contact</a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
@@ -360,6 +379,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="photography.html">Photography</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </div>
@@ -572,6 +592,48 @@
 <script>
 (function(){
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- LOGO SHATTER EFFECT ---------- */
+  var logoBadge = document.querySelector('.logo-badge');
+  if (logoBadge){
+    var frag = document.createDocumentFragment();
+    logoBadge.childNodes.forEach(function(node){
+      var isDot = node.nodeType === Node.ELEMENT_NODE;
+      var text = node.textContent;
+      text.split('').forEach(function(ch){
+        var span = document.createElement('span');
+        span.className = 'letter' + (isDot ? ' dot' : '');
+        span.textContent = ch === ' ' ? ' ' : ch;
+        frag.appendChild(span);
+      });
+    });
+    logoBadge.innerHTML = '';
+    logoBadge.appendChild(frag);
+
+    logoBadge.addEventListener('click', function(e){
+      e.preventDefault();
+      if (logoBadge.classList.contains('shattered')) return;
+      logoBadge.classList.add('shattered');
+
+      var letters = logoBadge.querySelectorAll('.letter');
+      letters.forEach(function(letter){
+        var angle = Math.random() * Math.PI * 2;
+        var dist = 70 + Math.random() * 160;
+        var tx = Math.cos(angle) * dist;
+        var ty = Math.sin(angle) * dist;
+        var rot = Math.random() * 720 - 360;
+        letter.style.transitionDelay = (Math.random() * 120) + 'ms';
+        letter.style.transform = 'translate(' + tx + 'px,' + ty + 'px) rotate(' + rot + 'deg) scale(0.25)';
+        letter.style.opacity = '0';
+      });
+
+      setTimeout(function(){
+        logoBadge.style.opacity = '0';
+        logoBadge.style.visibility = 'hidden';
+        logoBadge.style.pointerEvents = 'none';
+      }, prefersReduced ? 0 : 950);
+    });
+  }
 
   /* ---------- MOBILE MENU ---------- */
   var toggle = document.getElementById('navToggle');
