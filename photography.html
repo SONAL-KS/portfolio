@@ -45,6 +45,7 @@
 
   *{ box-sizing: border-box; margin:0; padding:0; }
   html{ scroll-behavior: smooth; background: var(--void); }
+  img, svg, canvas, video{ max-width: 100%; }
 
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior: auto; }
@@ -92,7 +93,7 @@
   header.nav{ position: fixed; top: 18px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; pointer-events: none; }
   .logo-badge{
     pointer-events: auto; position: absolute; left: var(--edge); top: 50%; transform: translateY(-50%);
-    display: flex; align-items: center;
+    display: flex; align-items: center; white-space: nowrap;
     background: rgba(10,10,13,0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border); border-radius: 999px; padding: 12px 22px;
     box-shadow: 0 12px 40px -12px rgba(0,0,0,0.6);
@@ -123,7 +124,15 @@
   body.menu-open .nav-toggle span:nth-child(1){ transform: translateY(3px) rotate(45deg); }
   body.menu-open .nav-toggle span:nth-child(2){ transform: translateY(-3px) rotate(-45deg); }
 
-  @media (max-width: 760px){ .nav-links, .nav-cta{ display: none; } .nav-toggle{ display: block; } }
+  @media (max-width: 768px){
+    .nav-links, .nav-cta{ display: none; }
+    .nav-toggle{ display: block; width: 44px; height: 44px; }
+    .nav-toggle span{ left: 14px; }
+    .nav-toggle span:nth-child(1){ top: 19px; }
+    .nav-toggle span:nth-child(2){ top: 25px; }
+    .nav-pill{ padding: 8px; gap: 0; }
+    header.nav{ top: 12px; }
+  }
 
   .menu-overlay{
     position: fixed; inset: 0; z-index: 90; background: rgba(5,5,6,0.86);
@@ -135,7 +144,7 @@
   .menu-overlay ul{ list-style: none; text-align: center; }
   .menu-overlay li{ margin: 18px 0; overflow: hidden; }
   .menu-overlay a{
-    font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); display: inline-block;
+    font-family: var(--font-display); font-size: clamp(1.7rem, 8vw, 2.2rem); color: var(--ink); display: inline-block;
     transform: translateY(48px); opacity: 0; transition: transform 0.7s var(--ease-fluid), opacity 0.7s var(--ease-fluid);
   }
   body.menu-open .menu-overlay a{ transform: translateY(0); opacity: 1; }
@@ -162,14 +171,14 @@
   [data-reveal].in-view{ opacity: 1; transform: translateY(0); filter: blur(0); }
 
   /* ---------- HERO ---------- */
-  .hero{ min-height: 62dvh; display: flex; align-items: center; padding-top: 150px; padding-bottom: 40px; }
+  .hero{ min-height: 62dvh; display: flex; align-items: center; padding-top: 130px; padding-bottom: 40px; }
   .hero-content{ max-width: 720px; }
-  .hero h1{ font-size: clamp(2.3rem, 5vw, 3.8rem); line-height: 1.08; margin: 0 0 22px; }
+  .hero h1{ font-size: clamp(2rem, 8vw, 3.8rem); line-height: 1.1; margin: 0 0 22px; }
   .hero h1 em{ font-style: normal; color: var(--emerald); }
-  .hero p.lede{ font-size: 1.1rem; color: var(--dim); max-width: 560px; }
+  .hero p.lede{ font-size: clamp(1rem, 2.4vw, 1.1rem); color: var(--dim); max-width: 560px; }
 
   /* ---------- SECTION HEADS ---------- */
-  .section-head{ display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 48px; padding-top: 60px; }
+  .section-head{ display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: clamp(32px, 8vw, 48px); padding-top: clamp(40px, 8vw, 60px); }
   .section-head h2{ font-size: clamp(1.7rem, 3vw, 2.3rem); max-width: 640px; }
   .section-num{ font-family: var(--font-mono); color: var(--dim-2); font-size: 0.8rem; white-space: nowrap; padding-bottom: 6px; }
 
@@ -188,6 +197,10 @@
   .hobby-stats .label{ font-family: var(--font-mono); font-size: 0.72rem; color: var(--dim); text-align: right; }
 
   @media (max-width: 860px){ .hobby-grid{ grid-template-columns: 1fr; gap: 32px; } }
+  @media (max-width: 480px){
+    .hobby-stats .bezel-core{ flex-direction: column; align-items: flex-start; gap: 6px; padding: 20px 20px; }
+    .hobby-stats .label{ text-align: left; }
+  }
 
   /* ---------- GALLERY (bento) ---------- */
   .gallery{ padding-bottom: 120px; }
@@ -253,8 +266,8 @@
   /* ---------- FOOTER ---------- */
   footer{ border-top: 1px solid var(--glass-border); padding: 32px var(--edge) 48px; }
   .footer-inner{ max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--dim-2); }
-  .social-row{ display: flex; gap: 22px; }
-  .social-row a{ color: var(--dim); transition: color 0.4s var(--ease-fluid); }
+  .social-row{ display: flex; gap: 20px; }
+  .social-row a{ display: inline-flex; align-items: center; padding: 10px 0; color: var(--dim); transition: color 0.4s var(--ease-fluid); }
   .social-row a:hover{ color: var(--emerald); }
 </style>
 </head>
@@ -264,28 +277,28 @@
 <div class="ambient" aria-hidden="true"></div>
 
 <header class="nav">
-  <a href="landing.html" class="logo-badge logo">SONAL<span>.</span>KS</a>
+  <a href="index.html" class="logo-badge logo">SONAL<span>.</span>KS</a>
   <div class="nav-pill">
     <ul class="nav-links">
-      <li><a href="landing.html#work">Work</a></li>
-      <li><a href="landing.html#about">About</a></li>
-      <li><a href="landing.html#stack">Stack</a></li>
-      <li><a href="landing.html#experience">Experience</a></li>
-      <li><a href="photography.html" class="active">Photography</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#stack">Stack</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="photography.html" class="active" aria-current="page">Photography</a></li>
     </ul>
-    <a href="landing.html#contact" class="nav-cta">Contact</a>
+    <a href="index.html#contact" class="nav-cta">Contact</a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
   </div>
 </header>
 
 <div class="menu-overlay" id="menuOverlay">
   <ul>
-    <li><a href="landing.html#work">Work</a></li>
-    <li><a href="landing.html#about">About</a></li>
-    <li><a href="landing.html#stack">Stack</a></li>
-    <li><a href="landing.html#experience">Experience</a></li>
-    <li><a href="photography.html">Photography</a></li>
-    <li><a href="landing.html#contact">Contact</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#stack">Stack</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="photography.html" class="active" aria-current="page">Photography</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </div>
 
@@ -376,7 +389,7 @@
 
   <!-- CTA back -->
   <section class="wrap" style="padding-bottom: 100px;">
-    <a href="landing.html" class="btn btn-ghost" data-reveal>Back to the main site<span class="btn-icon">↗</span></a>
+    <a href="index.html" class="btn btn-ghost" data-reveal>Back to the main site<span class="btn-icon">↗</span></a>
   </section>
 
 </main>
